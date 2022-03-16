@@ -14,7 +14,22 @@ export default function Home(){
     const deleteTodo = (id) => {
         var filtered = todos.filter((todo) => todo.id !==id);
         setTodos(filtered);
-    }
+    };
+
+    const editTodo = (id, editedText) => {
+        var todosArray = [...todos];
+
+        for ( var i in todosArray) {
+            if (todosArray[i].id == id) {
+                todosArray[i].text = editedText;
+            }
+        }
+
+
+        //todosArray.splice(id, 1, {text: editedText, id: id});
+        setTodos(todosArray);
+
+    };
 
     return(
         <Container maxwidht="xs" style={{ marginTop: "1em" }}>
@@ -22,7 +37,7 @@ export default function Home(){
       <List sx={{ marginTop: "1em" }} >
           {todos.map((todo) => ( 
               <div key={todo.id} style={{ marginTop: "1em" }} >
-                  <TodoItem todo={todo} deleteTodo={deleteTodo} />
+                  <TodoItem editTodo={editTodo} todo={todo} deleteTodo={deleteTodo} />
               </div>
           
            ))}
